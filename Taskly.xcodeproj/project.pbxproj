@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F1367EF723FE075B002621DE /* TasksUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1367EF623FE075B002621DE /* TasksUtility.swift */; };
 		F184914123FBA46300DA5EEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184914023FBA46300DA5EEA /* AppDelegate.swift */; };
 		F184914323FBA46300DA5EEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184914223FBA46300DA5EEA /* SceneDelegate.swift */; };
 		F184914823FBA46300DA5EEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F184914623FBA46300DA5EEA /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F1367EF623FE075B002621DE /* TasksUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksUtility.swift; sourceTree = "<group>"; };
 		F184913D23FBA46300DA5EEA /* Taskly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taskly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F184914023FBA46300DA5EEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F184914223FBA46300DA5EEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +43,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F1367EF223FDFBE7002621DE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F184915623FBACD200DA5EEA /* Task.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F1367EF323FDFBFB002621DE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F184915423FBA4A900DA5EEA /* TasksController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		F1367EF423FDFC08002621DE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F184915823FBAD5B00DA5EEA /* TaskStore.swift */,
+				F1367EF623FE075B002621DE /* TasksUtility.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F1367EF523FE0325002621DE /* System */ = {
+			isa = PBXGroup;
+			children = (
+				F184914023FBA46300DA5EEA /* AppDelegate.swift */,
+				F184914223FBA46300DA5EEA /* SceneDelegate.swift */,
+				F184914923FBA46400DA5EEA /* Assets.xcassets */,
+				F184914B23FBA46400DA5EEA /* LaunchScreen.storyboard */,
+				F184914E23FBA46400DA5EEA /* Info.plist */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
 		F184913423FBA46300DA5EEA = {
 			isa = PBXGroup;
 			children = (
@@ -60,15 +99,11 @@
 		F184913F23FBA46300DA5EEA /* Taskly */ = {
 			isa = PBXGroup;
 			children = (
-				F184914023FBA46300DA5EEA /* AppDelegate.swift */,
-				F184914223FBA46300DA5EEA /* SceneDelegate.swift */,
 				F184914623FBA46300DA5EEA /* Main.storyboard */,
-				F184914923FBA46400DA5EEA /* Assets.xcassets */,
-				F184914B23FBA46400DA5EEA /* LaunchScreen.storyboard */,
-				F184914E23FBA46400DA5EEA /* Info.plist */,
-				F184915423FBA4A900DA5EEA /* TasksController.swift */,
-				F184915623FBACD200DA5EEA /* Task.swift */,
-				F184915823FBAD5B00DA5EEA /* TaskStore.swift */,
+				F1367EF423FDFC08002621DE /* Helpers */,
+				F1367EF323FDFBFB002621DE /* Controllers */,
+				F1367EF223FDFBE7002621DE /* Models */,
+				F1367EF523FE0325002621DE /* System */,
 			);
 			path = Taskly;
 			sourceTree = "<group>";
@@ -147,6 +182,7 @@
 				F184915923FBAD5B00DA5EEA /* TaskStore.swift in Sources */,
 				F184915723FBACD200DA5EEA /* Task.swift in Sources */,
 				F184914123FBA46300DA5EEA /* AppDelegate.swift in Sources */,
+				F1367EF723FE075B002621DE /* TasksUtility.swift in Sources */,
 				F184915523FBA4A900DA5EEA /* TasksController.swift in Sources */,
 				F184914323FBA46300DA5EEA /* SceneDelegate.swift in Sources */,
 			);
@@ -293,7 +329,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Taskly/Info.plist;
+				INFOPLIST_FILE = Taskly/System/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,7 +346,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Taskly/Info.plist;
+				INFOPLIST_FILE = Taskly/System/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -9,11 +9,23 @@
 import UIKit
 
 class TasksController: UITableViewController {
-
-    var taskStore: TaskStore!
     
+    var taskStore: TaskStore! {
+        didSet {
+            // Get data
+            taskStore.tasks = TasksUtility.fetch() ?? [[Task](), [Task]()]
+            
+            // Reload table view
+            tableView.reloadData()
+        }
+        
+    }
+    
+    // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.tableFooterView = UIView()
     }
     
     @IBAction func addTask(_ sender: UIBarButtonItem) {
@@ -22,7 +34,7 @@ class TasksController: UITableViewController {
         
         // Set up the actions
         let addAction = UIAlertAction(title: "Add Task", style: .default) { _ in
-        
+            
             // Grab text field  text
             guard let name = alertController.textFields?.first?.text else { return }
             
@@ -35,6 +47,10 @@ class TasksController: UITableViewController {
             // Reload data in table view
             let indexPath = IndexPath(row: 0, section: 0)
             self.tableView.insertRows(at: [indexPath], with: .automatic)
+            
+            // Save
+            TasksUtility.save(self.taskStore.tasks)
+            
             
         }
         
@@ -53,7 +69,7 @@ class TasksController: UITableViewController {
         // Add the actions
         alertController.addAction(addAction)
         alertController.addAction(cancelAction)
-
+        
         //Present
         present(alertController, animated: true)
         
@@ -66,9 +82,9 @@ class TasksController: UITableViewController {
         //Guards are so so helpful and I use them all the time because it won't allow any code below the guard
         //statement to be executed unless certain conditions are met.
         guard let alertController = presentedViewController as? UIAlertController,
-              let addAction = alertController.actions.first,
-              let text = sender.text
-              else { return }
+            let addAction = alertController.actions.first,
+            let text = sender.text
+            else { return }
         
         // Enable ad action based on if text is empty or contains whitespace
         addAction.isEnabled = !text.trimmingCharacters(in: .whitespaces).isEmpty
@@ -92,17 +108,17 @@ extension TasksController {
     }
     
     // table内のcellの数を設定
-     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return taskStore.tasks[section].count
     }
     
     // cell 内の設定
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = taskStore.tasks[indexPath.section][indexPath.row].name
         return cell
     }
-
+    
 }
 
 // MARK: - Delegate
@@ -118,7 +134,7 @@ extension TasksController {
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { (action, sourceView, completionHandler) in
             
             // Determine whether the task `isDone`
-            let isDone = self.taskStore.tasks[indexPath.section][indexPath.row].isDone
+            guard let isDone = self.taskStore.tasks[indexPath.section][indexPath.row].isDone else { return }
             
             // Remove the task from the appropriate array
             self.taskStore.removeTask(at: indexPath.row, isDone: isDone)
@@ -126,6 +142,9 @@ extension TasksController {
             // Reload table view
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
             
+            // Save
+            TasksUtility.save(self.taskStore.tasks)
+           
             // Indicate that the action was performed
             completionHandler(true)
         }
@@ -156,6 +175,10 @@ extension TasksController {
             
             // Indicate the action was performed
             tableView.insertRows(at: [IndexPath(row: 0, section: 1)], with: .automatic)
+            
+            // Save
+            TasksUtility.save(self.taskStore.tasks)
+                       
             
             completionHandler(true)
             
